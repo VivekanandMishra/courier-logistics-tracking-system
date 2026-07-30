@@ -25,33 +25,33 @@ public class DeliveryAgentServiceImpl implements DeliveryAgentService {
     }
 
     @Override
-    public DeliveryAgent getDeliveryAgentById(int id) {
+    public DeliveryAgent getDeliveryAgentById(Long id) {
         return deliveryAgentRepository.findById(id).orElse(null);
     }
 
     @Override
-    public DeliveryAgent updateDeliveryAgent(int id, DeliveryAgent deliveryAgent) {
+    public DeliveryAgent updateDeliveryAgent(Long id, DeliveryAgent deliveryAgent) {
 
         DeliveryAgent existingAgent = deliveryAgentRepository.findById(id).orElse(null);
 
         if (existingAgent != null) {
 
 //        	existingAgent.setName(deliveryAgent.getName());
-//        	existingAgent.setEmail(deliveryAgent.getEmail());
-//        	existingAgent.setPhoneNo(deliveryAgent.getPhoneNo());
-//        	existingAgent.setVehicleType(deliveryAgent.getVehicleType());
-//        	existingAgent.setVehicleNumber(deliveryAgent.getVehicleNumber());
-//        	existingAgent.setCurrentLocation(deliveryAgent.getCurrentLocation());
+        	existingAgent.setEmail(deliveryAgent.getEmail());
+        	existingAgent.setPhoneNo(deliveryAgent.getPhoneNo());
+        	existingAgent.setVehicleType(deliveryAgent.getVehicleType());
+        	existingAgent.setVehicleNumber(deliveryAgent.getVehicleNumber());
+        	existingAgent.setCurrentLocation(deliveryAgent.getCurrentLocation());
 //        	existingAgent.setAvailable(deliveryAgent.isAvailable());
-//
-//            return deliveryAgentRepository.save(existingAgent);
+
+            return deliveryAgentRepository.save(existingAgent);
         }
 
         return null;
     }
 
     @Override
-    public String deleteDeliveryAgent(int id) {
+    public String deleteDeliveryAgent(Long id) {
 
         DeliveryAgent existingAgent = deliveryAgentRepository.findById(id).orElse(null);
 

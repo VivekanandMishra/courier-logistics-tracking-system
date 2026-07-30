@@ -36,33 +36,33 @@ public class DeliveryAgentController {
         return ResponseEntity.ok(
                 deliveryAgentService.getAllDeliveryAgents());
     }
-//    // Get Delivery Agent By Id
-//    @GetMapping("/{id}")
-//    public ResponseEntity<DeliveryAgent> getDeliveryAgentById(
-//            @PathVariable Long id) {
+    // Get Delivery Agent By Id
+    @GetMapping("/{id}")
+    public ResponseEntity<DeliveryAgent> getDeliveryAgentById(
+            @PathVariable Long id) {
+
+        return ResponseEntity.ok(
+                deliveryAgentService.getDeliveryAgentById(id));
+    }
 //
-//        return ResponseEntity.ok(
-//                deliveryAgentService.getDeliveryAgentById(id));
-//    }
+    // Update Delivery Agent
+    @PutMapping("/{id}")
+    public ResponseEntity<DeliveryAgent> updateDeliveryAgent(
+            @PathVariable Long id,
+            @RequestBody DeliveryAgent deliveryAgent) {
+
+        return ResponseEntity.ok(
+                deliveryAgentService.updateDeliveryAgent(id, deliveryAgent));
+    }
 //
-//    // Update Delivery Agent
-//    @PutMapping("/{id}")
-//    public ResponseEntity<DeliveryAgent> updateDeliveryAgent(
-//            @PathVariable Long id,
-//            @RequestBody DeliveryAgent deliveryAgent) {
-//
-//        return ResponseEntity.ok(
-//                deliveryAgentService.updateDeliveryAgent(id, deliveryAgent));
-//    }
-//
-//    // Delete Delivery Agent
-//    @DeleteMapping("/{id}")
-//    public ResponseEntity<String> deleteDeliveryAgent(
-//            @PathVariable Long id) {
-//
-//        deliveryAgentService.deleteDeliveryAgent(id);
-//
-//        return ResponseEntity.ok("Delivery Agent deleted successfully.");
-//    }
+    // Delete Delivery Agent
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteDeliveryAgent(
+            @PathVariable Long id) {
+
+        deliveryAgentService.deleteDeliveryAgent(id);
+
+        return ResponseEntity.ok("Delivery Agent deleted successfully.");
+    }
 
 }

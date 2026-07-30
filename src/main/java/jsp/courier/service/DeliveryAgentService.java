@@ -17,9 +17,9 @@ public interface DeliveryAgentService {
     DeliveryAgent getDeliveryAgentById(Long id);
 
     // Update Delivery Agent
-    DeliveryAgent updateDeliveryAgent(int id, DeliveryAgent deliveryAgent);
+    DeliveryAgent updateDeliveryAgent(Long id, DeliveryAgent deliveryAgent);
 
     // Delete Delivery Agent
-    String deleteDeliveryAgent(int id);
+    String deleteDeliveryAgent(Long id);
 
 }

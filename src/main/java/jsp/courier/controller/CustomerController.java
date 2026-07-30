@@ -53,5 +53,3 @@ public class CustomerController {
 return customerService.updateCustomer(id, customer);
 }
 }
-   
-
