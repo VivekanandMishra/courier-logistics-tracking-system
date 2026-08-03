@@ -36,13 +36,14 @@ public class DeliveryAgentServiceImpl implements DeliveryAgentService {
 
         if (existingAgent != null) {
 
-//        	existingAgent.setName(deliveryAgent.getName());
+        	existingAgent.setFirstName(deliveryAgent.getFirstName());
+        	existingAgent.setLastName(deliveryAgent.getLastName());
         	existingAgent.setEmail(deliveryAgent.getEmail());
         	existingAgent.setPhoneNo(deliveryAgent.getPhoneNo());
         	existingAgent.setVehicleType(deliveryAgent.getVehicleType());
         	existingAgent.setVehicleNumber(deliveryAgent.getVehicleNumber());
         	existingAgent.setCurrentLocation(deliveryAgent.getCurrentLocation());
-//        	existingAgent.setAvailable(deliveryAgent.isAvailable());
+        	existingAgent.setAvailable(deliveryAgent.isAvailable());
 
             return deliveryAgentRepository.save(existingAgent);
         }
