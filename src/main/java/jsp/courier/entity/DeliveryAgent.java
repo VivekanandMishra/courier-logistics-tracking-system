@@ -1,6 +1,7 @@
 package jsp.courier.entity;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
@@ -42,13 +43,13 @@ public class DeliveryAgent {
     private String currentLocation;
 
     @Column(nullable = false)
-    private boolean available;
+    private Boolean available;
 
     private LocalDate joiningDate;
 
     private Double salary;
 
-    // Uncomment if Shipment entity exists
-    // @OneToMany(mappedBy = "deliveryAgent", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    // private List<Shipment> shipments;
+//    if Uncomment if Shipment entity exists
+     @OneToMany(mappedBy = "deliveryAgent", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+     private List<Shipment> shipments;
 }

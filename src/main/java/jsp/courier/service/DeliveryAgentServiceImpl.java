@@ -43,7 +43,7 @@ public class DeliveryAgentServiceImpl implements DeliveryAgentService {
         	existingAgent.setVehicleType(deliveryAgent.getVehicleType());
         	existingAgent.setVehicleNumber(deliveryAgent.getVehicleNumber());
         	existingAgent.setCurrentLocation(deliveryAgent.getCurrentLocation());
-        	existingAgent.setAvailable(deliveryAgent.isAvailable());
+        	existingAgent.setAvailable(deliveryAgent.getAvailable());
 
             return deliveryAgentRepository.save(existingAgent);
         }

@@ -50,19 +50,5 @@ public class Shipment {
     private LocalDateTime deliveredDate;
 
     private String remarks;
-
-	public void setStatus(ShipmentStatus created) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public Object getStatus() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public void setShippedDate(LocalDateTime now) {
-		// TODO Auto-generated method stub
-		
-	}
+	
 }
