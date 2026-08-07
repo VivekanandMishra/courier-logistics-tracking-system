@@ -1,10 +1,8 @@
 package jsp.courier.dto;
 
-import org.springframework.context.annotation.Role;
-
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+import jsp.courier.Role;
 import lombok.Data;
 
 @Data
@@ -20,6 +18,5 @@ public class UsersRequest {
     @NotBlank(message = "Password is required")
     private String password;
 
-//    @NotNull(message = "Role is required")
     private Role role;
 }

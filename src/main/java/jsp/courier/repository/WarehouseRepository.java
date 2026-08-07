@@ -1,5 +1,11 @@
 package jsp.courier.repository;
 
-public class WarehouseRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import jsp.courier.entity.Warehouse;
+
+@Repository
+public interface WarehouseRepository extends JpaRepository<Warehouse, Integer> {
 
 }

@@ -16,8 +16,5 @@ public interface UsersRepository extends JpaRepository<Users, Long> {
 
     boolean existsByEmail(String email);
 
-	static Users saveAll(Users user) {
-		// TODO Auto-generated method stub
-		return null;
+	
 	}
-}
