@@ -57,16 +57,16 @@ public class ShipmentServiceImpl implements ShipmentService {
                 .orElseThrow(() ->
                         new RuntimeException("Shipment not found with id: " + id));
 
-//        existingShipment.setShipmentNumber(shipment.getShipmentNumber());
-//        existingShipment.setCustomer(shipment.getCustomer());
-//        existingShipment.setDeliveryAgent(shipment.getDeliveryAgent());
-//        existingShipment.setStatus(shipment.getStatus());
-//        existingShipment.setSourceLocation(shipment.getSourceLocation());
-//        existingShipment.setDestinationLocation(shipment.getDestinationLocation());
-//        existingShipment.setCurrentLocation(shipment.getCurrentLocation());
-//        existingShipment.setEstimatedDeliveryDate(shipment.getEstimatedDeliveryDate());
-//        existingShipment.setDeliveredDate(shipment.getDeliveredDate());
-//        existingShipment.setRemarks(shipment.getRemarks());
+        existingShipment.setShipmentNumber(shipment.getShipmentNumber());
+        existingShipment.setCustomer(shipment.getCustomer());
+        existingShipment.setDeliveryAgent(shipment.getDeliveryAgent());
+        existingShipment.setStatus(shipment.getStatus());
+        existingShipment.setSourceLocation(shipment.getSourceLocation());
+        existingShipment.setDestinationLocation(shipment.getDestinationLocation());
+        existingShipment.setCurrentLocation(shipment.getCurrentLocation());
+        existingShipment.setEstimatedDeliveryDate(shipment.getEstimatedDeliveryDate());
+        existingShipment.setDeliveredDate(shipment.getDeliveredDate());
+        existingShipment.setRemarks(shipment.getRemarks());
 
         return shipmentRepository.save(existingShipment);
     }
