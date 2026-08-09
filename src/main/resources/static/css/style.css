@@ -1,0 +1,103 @@
+/* General Page */
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f6f8;
+    text-align: center;
+}
+
+/* Header */
+
+header {
+    background-color: #1f4e79;
+    color: white;
+    padding: 25px;
+}
+
+h1 {
+    margin: 0;
+}
+
+/* Dashboard */
+
+.container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 25px;
+    margin: 50px auto;
+    max-width: 1000px;
+}
+
+/* Cards */
+
+.card {
+    background-color: white;
+    width: 200px;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.card h2 {
+    margin-top: 0;
+}
+
+.card p {
+    color: #555;
+}
+
+/* Buttons */
+
+button {
+    background-color: #1f4e79;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+button:hover {
+    background-color: #163a5c;
+}
+
+/* Form Tables */
+
+table {
+    margin: 30px auto;
+    border-collapse: collapse;
+}
+
+td {
+    padding: 10px;
+}
+
+/* Input */
+
+input,
+select {
+    padding: 8px;
+    width: 220px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Data Tables */
+
+table[border="1"] {
+    background-color: white;
+}
+
+table[border="1"] th,
+table[border="1"] td {
+    padding: 10px 15px;
+}
+
+table[border="1"] th {
+    background-color: #1f4e79;
+    color: white;
+}

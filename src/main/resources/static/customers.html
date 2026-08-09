@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customers</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <h1>Customer Management</h1>
+
+    <table>
+        <tr>
+            <td>Name</td>
+            <td><input type="text" id="name"></td>
+        </tr>
+
+        <tr>
+            <td>Email</td>
+            <td><input type="email" id="email"></td>
+        </tr>
+
+        <tr>
+            <td>Phone</td>
+            <td><input type="text" id="phone"></td>
+        </tr>
+
+        <tr>
+            <td>Address</td>
+            <td><input type="text" id="address"></td>
+        </tr>
+    </table>
+
+    <br>
+
+    <button onclick="saveCustomer()">Save Customer</button>
+
+    <button onclick="getCustomers()">Load Customers</button>
+
+    <br><br>
+
+    <table border="1">
+
+        <thead>
+
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Address</th>
+            </tr>
+
+        </thead>
+
+        <tbody id="customerTable">
+
+        </tbody>
+
+    </table>
+
+    <script src="js/customer.js"></script>
+
+</body>
+
+</html>

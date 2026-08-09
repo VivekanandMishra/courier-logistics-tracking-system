@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Shipment Management</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+<h1>Shipment Management</h1>
+
+<table>
+
+<tr>
+    <td>Shipment Number</td>
+    <td><input type="text" id="shipmentNumber"></td>
+</tr>
+
+<tr>
+    <td>Customer ID</td>
+    <td><input type="number" id="customerId"></td>
+</tr>
+
+<tr>
+    <td>Delivery Agent ID</td>
+    <td><input type="number" id="agentId"></td>
+</tr>
+
+<tr>
+    <td>Source</td>
+    <td><input type="text" id="sourceLocation"></td>
+</tr>
+
+<tr>
+    <td>Destination</td>
+    <td><input type="text" id="destinationLocation"></td>
+</tr>
+
+<tr>
+    <td>Status</td>
+    <td>
+        <select id="status">
+            <option value="CREATED">CREATED</option>
+            <option value="PICKED_UP">PICKED_UP</option>
+            <option value="IN_TRANSIT">IN_TRANSIT</option>
+            <option value="OUT_FOR_DELIVERY">OUT_FOR_DELIVERY</option>
+            <option value="DELIVERED">DELIVERED</option>
+            <option value="CANCELLED">CANCELLED</option>
+        </select>
+    </td>
+</tr>
+
+</table>
+
+<br>
+
+<button onclick="saveShipment()">Save Shipment</button>
+
+<button onclick="getShipments()">Load Shipments</button>
+
+<br><br>
+
+<table border="1">
+
+<thead>
+
+<tr>
+    <th>ID</th>
+    <th>Shipment No</th>
+    <th>Status</th>
+    <th>Source</th>
+    <th>Destination</th>
+</tr>
+
+</thead>
+
+<tbody id="shipmentTable">
+
+</tbody>
+
+</table>
+
+<script src="js/shipment.js"></script>
+
+</body>
+
+</html>
