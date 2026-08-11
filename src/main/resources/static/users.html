@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>User Management</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+
+<body>
+
+
+<header>
+
+    <h1>User Management</h1>
+
+    <p>Manage System Users</p>
+
+</header>
+
+
+<div class="container">
+
+
+    <div class="card">
+
+        <h2>Add User</h2>
+
+
+        <form id="userForm">
+
+
+            <table>
+
+                <tr>
+
+                    <td>Username</td>
+
+                    <td>
+                        <input
+                            type="text"
+                            id="username"
+                            placeholder="Enter username"
+                            required>
+                    </td>
+
+                </tr>
+
+
+                <tr>
+
+                    <td>Email</td>
+
+                    <td>
+                        <input
+                            type="email"
+                            id="email"
+                            placeholder="Enter email"
+                            required>
+                    </td>
+
+                </tr>
+
+
+                <tr>
+
+                    <td>Role</td>
+
+                    <td>
+
+                        <select id="role" required>
+
+                            <option value="">
+                                Select Role
+                            </option>
+
+                            <option value="ADMIN">
+                                ADMIN
+                            </option>
+
+                            <option value="USER">
+                                USER
+                            </option>
+
+                            <option value="CUSTOMER">
+                                CUSTOMER
+                            </option>
+
+                            <option value="DELIVERY_AGENT">
+                                DELIVERY_AGENT
+                            </option>
+
+                        </select>
+
+                    </td>
+
+                </tr>
+
+            </table>
+
+
+            <br>
+
+
+            <button type="submit">
+                Save User
+            </button>
+
+
+            <button
+                type="button"
+                onclick="loadUsers()">
+
+                Load Users
+
+            </button>
+
+
+        </form>
+
+
+        <p id="message"></p>
+
+    </div>
+
+</div>
+
+
+
+<h2>User List</h2>
+
+
+<table border="1">
+
+    <thead>
+
+        <tr>
+
+            <th>ID</th>
+
+            <th>Username</th>
+
+            <th>Email</th>
+
+            <th>Role</th>
+
+        </tr>
+
+    </thead>
+
+
+    <tbody id="userTable">
+
+    </tbody>
+
+</table>
+
+
+
+<script src="js/users.js"></script>
+
+
+</body>
+
+</html>

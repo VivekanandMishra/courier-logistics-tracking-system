@@ -1,0 +1,157 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Warehouse Management</title>
+
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+
+<header>
+    <h1>Warehouse Management</h1>
+</header>
+
+<div class="container">
+
+    <div class="card">
+
+        <h2>Add Warehouse</h2>
+
+        <form id="warehouseForm">
+
+            <p>
+                <label for="warehouseName">Warehouse Name</label><br>
+                <input
+                    type="text"
+                    id="warehouseName"
+                    required>
+            </p>
+
+            <p>
+                <label for="warehouseCode">Warehouse Code</label><br>
+                <input
+                    type="text"
+                    id="warehouseCode"
+                    required>
+            </p>
+
+            <p>
+                <label for="location">Location</label><br>
+                <input
+                    type="text"
+                    id="location"
+                    required>
+            </p>
+
+            <p>
+                <label for="city">City</label><br>
+                <input
+                    type="text"
+                    id="city"
+                    required>
+            </p>
+
+            <p>
+                <label for="state">State</label><br>
+                <input
+                    type="text"
+                    id="state"
+                    required>
+            </p>
+
+            <p>
+                <label for="capacity">Capacity</label><br>
+                <input
+                    type="number"
+                    id="capacity"
+                    required>
+            </p>
+
+            <p>
+                <label for="managerName">Manager Name</label><br>
+                <input
+                    type="text"
+                    id="managerName">
+            </p>
+
+            <p>
+                <label for="contactNumber">Contact Number</label><br>
+                <input
+                    type="text"
+                    id="contactNumber">
+            </p>
+
+            <p>
+                <label>
+                    <input
+                        type="checkbox"
+                        id="active"
+                        checked>
+                    Active
+                </label>
+            </p>
+
+            <button type="submit">
+                Save Warehouse
+            </button>
+
+            <button
+                type="button"
+                onclick="loadWarehouses()">
+                Load Warehouses
+            </button>
+
+        </form>
+
+        <h3 id="message"></h3>
+
+    </div>
+
+</div>
+
+
+<div class="container">
+
+    <div class="card">
+
+        <h2>Warehouse List</h2>
+
+        <table>
+
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Code</th>
+                    <th>Name</th>
+                    <th>Location</th>
+                    <th>City</th>
+                    <th>State</th>
+                    <th>Capacity</th>
+                    <th>Manager</th>
+                    <th>Contact</th>
+                    <th>Active</th>
+                </tr>
+            </thead>
+
+            <tbody id="warehouseTable">
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+
+<script src="/js/warehouse.js"></script>
+
+</body>
+
+</html>
+```

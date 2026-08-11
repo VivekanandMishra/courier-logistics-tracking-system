@@ -3,6 +3,8 @@ package jsp.courier.entity;
 import java.time.LocalDate;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import lombok.AllArgsConstructor;
@@ -49,7 +51,12 @@ public class DeliveryAgent {
 
     private Double salary;
 
-//    if Uncomment if Shipment entity exists
-     @OneToMany(mappedBy = "deliveryAgent", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-     private List<Shipment> shipments;
+    @OneToMany(
+        mappedBy = "deliveryAgent",
+        cascade = CascadeType.ALL,
+        fetch = FetchType.LAZY
+    )
+    @JsonIgnore
+    private List<Shipment> shipments;
 }
+

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Shipment Status</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<header>
+    <h1>Shipment Status</h1>
+    <p>Courier Logistics Tracking System</p>
+</header>
+
+
+<div class="container">
+
+    <div class="card">
+
+        <h2>Shipment Status</h2>
+
+        <p>Select Shipment Status</p>
+
+        <select id="shipmentStatus">
+
+            <option value="">Select Status</option>
+
+            <option value="CREATED">
+                CREATED
+            </option>
+
+            <option value="PICKED_UP">
+                PICKED UP
+            </option>
+
+            <option value="IN_TRANSIT">
+                IN TRANSIT
+            </option>
+
+            <option value="OUT_FOR_DELIVERY">
+                OUT FOR DELIVERY
+            </option>
+
+            <option value="DELIVERED">
+                DELIVERED
+            </option>
+
+            <option value="CANCELLED">
+                CANCELLED
+            </option>
+
+        </select>
+
+        <br><br>
+
+        <button
+            type="button"
+            onclick="showStatus()">
+
+            Show Status
+
+        </button>
+
+        <p id="message"></p>
+
+    </div>
+
+</div>
+
+
+<h2>Shipment Status List</h2>
+
+
+<table border="1">
+
+    <thead>
+
+        <tr>
+            <th>ID</th>
+            <th>Status</th>
+        </tr>
+
+    </thead>
+
+
+    <tbody id="statusTable">
+
+    </tbody>
+
+</table>
+
+
+<script src="js/shipment-status.js"></script>
+
+</body>
+
+</html>

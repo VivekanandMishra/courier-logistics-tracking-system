@@ -8,14 +8,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import jsp.courier.entity.DeliveryAgent;
-import jsp.courier.service.CustomerService;
 import jsp.courier.service.DeliveryAgentService;
-import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/delivery-agents")
 public class DeliveryAgentController {
-	
+
     @Autowired
     private DeliveryAgentService deliveryAgentService;
 
@@ -30,12 +28,13 @@ public class DeliveryAgentController {
     }
 
     // Get All Delivery Agents
-    @GetMapping("/All-agents")
+    @GetMapping
     public ResponseEntity<List<DeliveryAgent>> getAllDeliveryAgents() {
 
         return ResponseEntity.ok(
                 deliveryAgentService.getAllDeliveryAgents());
     }
+
     // Get Delivery Agent By Id
     @GetMapping("/{id}")
     public ResponseEntity<DeliveryAgent> getDeliveryAgentById(
@@ -44,7 +43,7 @@ public class DeliveryAgentController {
         return ResponseEntity.ok(
                 deliveryAgentService.getDeliveryAgentById(id));
     }
-//
+
     // Update Delivery Agent
     @PutMapping("/{id}")
     public ResponseEntity<DeliveryAgent> updateDeliveryAgent(
@@ -54,7 +53,7 @@ public class DeliveryAgentController {
         return ResponseEntity.ok(
                 deliveryAgentService.updateDeliveryAgent(id, deliveryAgent));
     }
-//
+
     // Delete Delivery Agent
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteDeliveryAgent(
@@ -62,7 +61,7 @@ public class DeliveryAgentController {
 
         deliveryAgentService.deleteDeliveryAgent(id);
 
-        return ResponseEntity.ok("Delivery Agent deleted successfully.");
+        return ResponseEntity.ok(
+                "Delivery Agent deleted successfully.");
     }
-
 }

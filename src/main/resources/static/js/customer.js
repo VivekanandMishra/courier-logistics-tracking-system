@@ -20,6 +20,11 @@ function saveCustomer() {
     })
     .then(response => {
         console.log("POST Status:", response.status);
+
+        if (!response.ok) {
+            throw new Error("HTTP Error: " + response.status);
+        }
+
         return response.json();
     })
     .then(data => {
@@ -27,7 +32,6 @@ function saveCustomer() {
 
         alert("Customer saved successfully!");
 
-        // Automatically reload customers
         getCustomers();
     })
     .catch(error => {
@@ -36,53 +40,76 @@ function saveCustomer() {
     });
 }
 
-
 function getCustomers() {
 
+    console.log("Calling:", API_URL);
+
     fetch(API_URL)
-    .then(response => {
+        .then(response => {
 
-        console.log("GET Status:", response.status);
+            console.log("HTTP Status:", response.status);
+            console.log("Response OK:", response.ok);
 
-        if (!response.ok) {
-            throw new Error("HTTP Error: " + response.status);
-        }
+            if (!response.ok) {
+                throw new Error("HTTP Error: " + response.status);
+            }
 
-        return response.json();
-    })
-    .then(response => {
+            return response.text();
+        })
+        .then(text => {
 
-        console.log("GET Response:", response);
+            console.log("Raw Response:", text);
 
-        // If backend returns ResponseStructure
-        const customers = response.data;
+            const response = JSON.parse(text);
 
-        console.log("Customers:", customers);
+            console.log("Parsed Response:", response);
 
-        const table = document.getElementById("customerTable");
+            let customers;
 
-        table.innerHTML = "";
+            // If backend returns:
+            // { statusCode: 200, message: "...", data: [...] }
+            if (response.data) {
+                customers = response.data;
+            }
+            // If backend returns directly:
+            // [...]
+            else if (Array.isArray(response)) {
+                customers = response;
+            }
+            else {
+                throw new Error("Customer data not found in response");
+            }
 
-        customers.forEach(customer => {
+            console.log("Customers:", customers);
 
-            table.innerHTML += `
-                <tr>
-                    <td>${customer.id}</td>
-                    <td>${customer.name}</td>
-                    <td>${customer.email}</td>
-                    <td>${customer.phoneNo}</td>
-                    <td>${customer.address}</td>
-                </tr>
-            `;
+            const table = document.getElementById("customerTable");
+
+            if (!table) {
+                throw new Error("customerTable element not found in HTML");
+            }
+
+            table.innerHTML = "";
+
+            customers.forEach(customer => {
+
+                table.innerHTML += `
+                    <tr>
+                        <td>${customer.id}</td>
+                        <td>${customer.name}</td>
+                        <td>${customer.email}</td>
+                        <td>${customer.phoneNo}</td>
+                        <td>${customer.address}</td>
+                    </tr>
+                `;
+
+            });
+
+        })
+        .catch(error => {
+
+            console.error("GET Error:", error);
+
+            alert("Error loading customers: " + error.message);
 
         });
-
-    })
-    .catch(error => {
-
-        console.error("GET Error:", error);
-
-        alert("Error loading customers");
-
-    });
 }

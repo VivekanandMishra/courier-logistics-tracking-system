@@ -1,84 +1,99 @@
+
 <!DOCTYPE html>
 <html>
-
 <head>
-
     <title>Delivery Agents</title>
 
     <link rel="stylesheet" href="css/style.css">
-
 </head>
 
 <body>
 
 <h1>Delivery Agent Management</h1>
 
-<table>
+<form id="agentForm">
 
-<tr>
-<td>First Name</td>
-<td><input type="text" id="firstName"></td>
-</tr>
+    <label>Agent Code</label>
+    <input type="text" id="agentCode" required>
 
-<tr>
-<td>Last Name</td>
-<td><input type="text" id="lastName"></td>
-</tr>
+    <label>First Name</label>
+    <input type="text" id="firstName" required>
 
-<tr>
-<td>Email</td>
-<td><input type="email" id="email"></td>
-</tr>
+    <label>Last Name</label>
+    <input type="text" id="lastName" required>
 
-<tr>
-<td>Phone</td>
-<td><input type="text" id="phoneNo"></td>
-</tr>
+    <label>Email</label>
+    <input type="email" id="email" required>
 
-<tr>
-<td>Vehicle Type</td>
-<td><input type="text" id="vehicleType"></td>
-</tr>
+    <label>Phone No</label>
+    <input type="text" id="phoneNo" required>
 
-<tr>
-<td>Vehicle Number</td>
-<td><input type="text" id="vehicleNumber"></td>
-</tr>
+    <label>Vehicle Type</label>
+    <input type="text" id="vehicleType" required>
 
-</table>
+    <label>Vehicle Number</label>
+    <input type="text" id="vehicleNumber" required>
 
-<br>
+    <label>Driving License No</label>
+    <input type="text" id="drivingLicenseNo" required>
 
-<button onclick="saveAgent()">Save Agent</button>
+    <label>Current Location</label>
+    <input type="text" id="currentLocation" required>
 
-<button onclick="getAgents()">Load Agents</button>
+    <label>Available</label>
+    <input type="checkbox" id="available" checked>
 
-<br><br>
+    <label>Joining Date</label>
+    <input type="date" id="joiningDate" required>
+
+    <label>Salary</label>
+    <input type="number" id="salary" required>
+
+    <br><br>
+
+    <!-- SAVE BUTTON -->
+    <button type="button" onclick="saveAgent()">
+        Save Agent
+    </button>
+
+    <!-- LOAD BUTTON -->
+    <button type="button" onclick="getAgents()">
+        Load Agents
+    </button>
+
+</form>
+
+
+<h2>Delivery Agents</h2>
 
 <table border="1">
 
-<thead>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Agent Code</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Vehicle Type</th>
+            <th>Vehicle Number</th>
+            <th>Driving License</th>
+            <th>Current Location</th>
+            <th>Available</th>
+            <th>Joining Date</th>
+            <th>Salary</th>
+        </tr>
+    </thead>
 
-<tr>
-
-<th>ID</th>
-<th>Name</th>
-<th>Email</th>
-<th>Phone</th>
-<th>Vehicle</th>
-
-</tr>
-
-</thead>
-
-<tbody id="agentTable">
-
-</tbody>
+    <tbody id="agentTable">
+    </tbody>
 
 </table>
 
-<script src="js/agent.js"></script>
+
+<script src="js/delivery-agents.js"></script>
 
 </body>
-
 </html>
+```
