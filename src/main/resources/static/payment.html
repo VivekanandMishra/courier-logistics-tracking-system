@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Payments · Ledger</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<style>
+  :root{
+    --paper:#EEF1EF;
+    --panel:#FFFFFF;
+    --ink:#10243D;
+    --ink-soft:#4C5D6E;
+    --line:#D8DEDA;
+    --stamp-green:#2F6B4F;
+    --stamp-green-bg:#E7F1EA;
+    --stamp-red:#B4432F;
+    --stamp-red-bg:#F7E9E5;
+    --stamp-gold:#B8892B;
+    --stamp-gold-bg:#F6EEDD;
+    --radius:2px;
+  }
+
+  *{box-sizing:border-box;}
+
+  body.payment-page{
+    margin:0;
+    background:var(--paper);
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size:64px 64px;
+    background-position:-1px -1px;
+    color:var(--ink);
+    font-family:'IBM Plex Sans', sans-serif;
+    min-height:100vh;
+  }
+
+  .pay-wrap{
+    max-width:1180px;
+    margin:0 auto;
+    padding:40px 24px 80px;
+  }
+
+  /* header */
+  .pay-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    gap:24px;
+    border-bottom:2px solid var(--ink);
+    padding-bottom:18px;
+    margin-bottom:28px;
+    flex-wrap:wrap;
+  }
+  .pay-eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    margin:0 0 6px;
+  }
+  .pay-title{
+    font-family:'Oswald', sans-serif;
+    font-weight:700;
+    font-size:34px;
+    letter-spacing:.02em;
+    margin:0;
+    text-transform:uppercase;
+  }
+  .pay-sub{
+    font-size:14px;
+    color:var(--ink-soft);
+    margin:6px 0 0;
+  }
+  .doc-no{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    color:var(--ink-soft);
+    text-align:right;
+  }
+  .doc-no span{ display:block; color:var(--ink); font-weight:600; }
+
+  /* summary strip */
+  .summary-strip{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+    margin-bottom:28px;
+  }
+  .summary-cell{
+    background:var(--panel);
+    padding:16px 20px;
+  }
+  .summary-label{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    margin:0 0 6px;
+  }
+  .summary-value{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:24px;
+    font-weight:600;
+    margin:0;
+  }
+  .summary-value.green{ color:var(--stamp-green); }
+  .summary-value.gold{ color:var(--stamp-gold); }
+  .summary-value.red{ color:var(--stamp-red); }
+
+  /* layout */
+  .pay-grid{
+    display:grid;
+    grid-template-columns:380px 1fr;
+    gap:24px;
+    align-items:start;
+  }
+  @media (max-width: 860px){
+    .pay-grid{ grid-template-columns:1fr; }
+  }
+
+  .card{
+    background:var(--panel);
+    border:1px solid var(--line);
+    padding:24px;
+  }
+  .card-title{
+    font-family:'Oswald', sans-serif;
+    font-size:15px;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    margin:0 0 20px;
+    padding-bottom:10px;
+    border-bottom:1px solid var(--line);
+  }
+
+  /* form */
+  .field{ margin-bottom:16px; position:relative; }
+  .field label{
+    display:block;
+    font-size:12px;
+    font-weight:600;
+    color:var(--ink-soft);
+    margin-bottom:6px;
+    text-transform:uppercase;
+    letter-spacing:.04em;
+  }
+  .field input,
+  .field select,
+  .field textarea{
+    width:100%;
+    border:1px solid var(--line);
+    background:var(--paper);
+    padding:10px 12px;
+    font-family:'IBM Plex Sans', sans-serif;
+    font-size:14px;
+    color:var(--ink);
+    border-radius:var(--radius);
+  }
+  .field input:focus,
+  .field select:focus,
+  .field textarea:focus{
+    outline:2px solid var(--ink);
+    outline-offset:1px;
+    background:var(--panel);
+  }
+  .field-amount{ font-family:'IBM Plex Mono', monospace; }
+  .field-row{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .field-error{
+    display:none;
+    font-size:12px;
+    color:var(--stamp-red);
+    margin-top:4px;
+    font-family:'IBM Plex Mono', monospace;
+  }
+  .field.invalid input, .field.invalid select{ border-color:var(--stamp-red); }
+  .field.invalid .field-error{ display:block; }
+
+  .method-group{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:8px;
+    margin-bottom:16px;
+  }
+  .method-option{
+    border:1px solid var(--line);
+    padding:10px;
+    text-align:center;
+    font-size:13px;
+    font-weight:500;
+    cursor:pointer;
+    background:var(--paper);
+    user-select:none;
+  }
+  .method-option.selected{
+    border-color:var(--ink);
+    background:var(--ink);
+    color:#fff;
+  }
+
+  .submit-btn{
+    width:100%;
+    padding:13px;
+    background:var(--ink);
+    color:#fff;
+    border:none;
+    font-family:'Oswald', sans-serif;
+    font-size:14px;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    cursor:pointer;
+    margin-top:6px;
+  }
+  .submit-btn:hover{ background:#0A1826; }
+  .submit-btn:disabled{ background:#9AA6AE; cursor:not-allowed; }
+
+  .confirm-banner{
+    display:none;
+    align-items:center;
+    gap:12px;
+    margin-top:16px;
+    padding:12px 14px;
+    background:var(--stamp-green-bg);
+    border:1px solid var(--stamp-green);
+    color:var(--stamp-green);
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+  }
+
+  /* ledger table */
+  .ledger-toolbar{
+    display:flex;
+    gap:10px;
+    margin-bottom:16px;
+    flex-wrap:wrap;
+  }
+  .ledger-toolbar input{
+    flex:1;
+    min-width:160px;
+    padding:9px 12px;
+    border:1px solid var(--line);
+    background:var(--paper);
+    font-size:13px;
+  }
+  .ledger-toolbar select{
+    padding:9px 12px;
+    border:1px solid var(--line);
+    background:var(--paper);
+    font-size:13px;
+  }
+
+  table.ledger{
+    width:100%;
+    border-collapse:collapse;
+    font-size:13px;
+  }
+  table.ledger thead th{
+    text-align:left;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    border-bottom:1px solid var(--ink);
+    padding:8px 10px;
+  }
+  table.ledger tbody td{
+    padding:12px 10px;
+    border-bottom:1px solid var(--line);
+    vertical-align:middle;
+  }
+  table.ledger tbody tr:hover{ background:var(--paper); }
+  .cell-amount{ font-family:'IBM Plex Mono', monospace; font-weight:600; }
+  .cell-id{ font-family:'IBM Plex Mono', monospace; color:var(--ink-soft); }
+
+  /* rubber stamp */
+  .stamp{
+    display:inline-block;
+    font-family:'Oswald', sans-serif;
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    padding:4px 10px;
+    border:2px solid currentColor;
+    border-radius:3px;
+    transform:rotate(-3deg);
+  }
+  .stamp.paid{ color:var(--stamp-green); background:var(--stamp-green-bg); }
+  .stamp.pending{ color:var(--stamp-gold); background:var(--stamp-gold-bg); }
+  .stamp.failed{ color:var(--stamp-red); background:var(--stamp-red-bg); }
+
+  .empty-row td{
+    text-align:center;
+    padding:32px 10px;
+    color:var(--ink-soft);
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+  }
+
+  @media (prefers-reduced-motion: no-preference){
+    .stamp.enter{ animation:stampIn .35s ease-out; }
+  }
+  @keyframes stampIn{
+    0%{ transform:rotate(-3deg) scale(2); opacity:0; }
+    60%{ transform:rotate(-3deg) scale(0.92); opacity:1; }
+    100%{ transform:rotate(-3deg) scale(1); }
+  }
+</style>
+</head>
+<body class="payment-page">
+  <div class="pay-wrap">
+
+    <div class="pay-header">
+      <div>
+        <p class="pay-eyebrow">Payments · Ledger</p>
+        <h1 class="pay-title">Payment Records</h1>
+        <p class="pay-sub">Record settlements and review the payment history for every shipment.</p>
+      </div>
+      <div class="doc-no">
+        Ledger ref
+        <span id="ledgerRef">PAY-0000</span>
+      </div>
+    </div>
+
+    <div class="summary-strip">
+      <div class="summary-cell">
+        <p class="summary-label">Collected</p>
+        <p class="summary-value green" id="sumCollected">₹0</p>
+      </div>
+      <div class="summary-cell">
+        <p class="summary-label">Pending</p>
+        <p class="summary-value gold" id="sumPending">₹0</p>
+      </div>
+      <div class="summary-cell">
+        <p class="summary-label">Failed</p>
+        <p class="summary-value red" id="sumFailed">₹0</p>
+      </div>
+    </div>
+
+    <div class="pay-grid">
+
+      <!-- Record payment form -->
+      <div class="card">
+        <h2 class="card-title">Record a payment</h2>
+        <form id="paymentForm" novalidate>
+
+          <div class="field" id="field-shipment">
+            <label for="shipmentId">Shipment / Order ID</label>
+            <input type="text" id="shipmentId" placeholder="e.g. SHP-10432" autocomplete="off">
+            <p class="field-error">Enter a shipment or order ID.</p>
+          </div>
+
+          <div class="field" id="field-customer">
+            <label for="customerName">Customer name</label>
+            <input type="text" id="customerName" placeholder="e.g. R. Menon" autocomplete="off">
+            <p class="field-error">Enter the customer's name.</p>
+          </div>
+
+          <div class="field-row">
+            <div class="field" id="field-amount">
+              <label for="amount">Amount (₹)</label>
+              <input type="number" id="amount" class="field-amount" placeholder="0.00" min="0" step="0.01">
+              <p class="field-error">Enter an amount greater than 0.</p>
+            </div>
+            <div class="field" id="field-date">
+              <label for="payDate">Date</label>
+              <input type="date" id="payDate">
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Method</label>
+            <div class="method-group" id="methodGroup">
+              <div class="method-option selected" data-method="UPI">UPI</div>
+              <div class="method-option" data-method="Card">Card</div>
+              <div class="method-option" data-method="Bank Transfer">Bank Transfer</div>
+              <div class="method-option" data-method="Cash on Delivery">Cash on Delivery</div>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="notes">Notes (optional)</label>
+            <textarea id="notes" rows="2" placeholder="Reference number, partial payment, etc."></textarea>
+          </div>
+
+          <button type="submit" class="submit-btn" id="submitBtn">Record payment</button>
+
+          <div class="confirm-banner" id="confirmBanner">
+            <span class="stamp paid enter" style="font-size:11px;">Paid</span>
+            <span id="confirmText">Payment recorded.</span>
+          </div>
+        </form>
+      </div>
+
+      <!-- Ledger -->
+      <div class="card">
+        <h2 class="card-title">Payment ledger</h2>
+
+        <div class="ledger-toolbar">
+          <input type="text" id="searchInput" placeholder="Search by shipment ID or customer…">
+          <select id="statusFilter">
+            <option value="all">All statuses</option>
+            <option value="paid">Paid</option>
+            <option value="pending">Pending</option>
+            <option value="failed">Failed</option>
+          </select>
+        </div>
+
+        <table class="ledger">
+          <thead>
+            <tr>
+              <th>Shipment</th>
+              <th>Customer</th>
+              <th>Method</th>
+              <th>Date</th>
+              <th>Amount</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="ledgerBody">
+            <!-- rows injected by payment.js -->
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="js/payment.js"></script>
+</body>
+</html>
